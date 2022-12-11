@@ -2,12 +2,15 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import filedialog
 from tkinter import StringVar
+from tkinter import PhotoImage
 import PyPDF2
 from tqdm import tqdm
 import time
 from gtts import gTTS
 import os
 import threading
+from PIL import Image
+
 
 window = tk.Tk()
 window.resizable(width=False, height=False)
@@ -16,7 +19,15 @@ screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
 position_x = (screen_width - 400) // 2
 position_y = (screen_height - 300) // 2
-window.geometry("400x300+{}+{}".format(position_x, position_y))
+window.geometry("600x400+{}+{}".format(position_x, position_y))
+
+# Background
+image = PhotoImage(file="logo-color.png")
+background_label = tk.Label(image=image)
+background_label.grid(row=0, column=0, sticky="nsew")
+
+window.grid_rowconfigure(0, weight=1)
+window.grid_columnconfigure(0, weight=1)
 
 progress_lock = threading.Lock()
 
@@ -29,9 +40,9 @@ bar_height = 30
 # progress bar
 progress_bar = ttk.Progressbar(master=window, length=200, variable=percent_var, maximum=100)
 percent_label = ttk.Label(master=window, textvariable=percent_var)
-percent_label.place(x=310, y=0, width=30, height=30)
-progress_bar.place(x=100, y=100, width=200, height=30)
-progress_bar.pack()
+progress_bar.place(x=200, y=0, width=200, height=30)
+percent_label.place(x=400, y=0, width=30, height=30)
+
 
 def process_pdf(filelocation):
     # Open the selected file and extract the text using PyPDF2
@@ -63,7 +74,7 @@ def btn():
     thread.start()
 
 button = tk.Button(master=window, text="Select File", command=btn)
-button.pack(side="bottom")
+button.grid(row=1, column=0, sticky="nsew")
 
 window.mainloop()
 
