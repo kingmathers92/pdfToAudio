@@ -9,8 +9,6 @@ import time
 from gtts import gTTS
 import os
 import threading
-from PIL import Image
-
 
 window = tk.Tk()
 window.resizable(width=False, height=False)
