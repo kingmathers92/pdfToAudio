@@ -29,7 +29,7 @@ bar_height = 30
 # progress bar
 progress_bar = ttk.Progressbar(master=window, length=200, variable=percent_var, maximum=100)
 percent_label = ttk.Label(master=window, textvariable=percent_var)
-percent_label.place(x=310, y=100, width=30, height=30)
+percent_label.place(x=310, y=0, width=30, height=30)
 progress_bar.place(x=100, y=100, width=200, height=30)
 progress_bar.pack()
 
