@@ -22,16 +22,16 @@ progress_lock = threading.Lock()
 
 # Calculations
 percent_var = StringVar()
-percent_var.set("{percent}% ({value}/{max})")
+percent_var.set("0%")
 bar_width = 200
 bar_height = 30
-bar_x = (window.winfo_width() - bar_width) // 2
-bar_y = (window.winfo_height() - bar_height) // 2
 
 # progress bar
-progress_bar = ttk.Progressbar(master=window, length=200, variable=percent_var)
-progress_bar.pack(side="top")
-progress_bar.place(x=bar_x, y=bar_y, width=bar_width, height=bar_height)
+progress_bar = ttk.Progressbar(master=window, length=200, variable=percent_var, maximum=100)
+percent_label = ttk.Label(master=window, textvariable=percent_var)
+percent_label.place(x=310, y=100, width=30, height=30)
+progress_bar.place(x=100, y=100, width=200, height=30)
+progress_bar.pack()
 
 def process_pdf(filelocation):
     # Open the selected file and extract the text using PyPDF2
